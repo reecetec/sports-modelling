@@ -111,10 +111,7 @@ class NCAABManager(DataManager):
 
             # Validate each DataFrame
             self.logger.info("Validating data...")
-            # self._validate_game_info(game_info)
-            # self._validate_box_scores(box_scores)
-            # self._validate_play_by_play(play_by_play)
-
+        
             # Save each DataFrame in ncaab subdirectory
             self.save_parquet(game_info, f"game_info/season={season}/data.parquet")
 
@@ -134,11 +131,6 @@ class NCAABManager(DataManager):
                 "play_by_play": play_by_play,
             }
 
-        except DataValidationError as e:
-            self.logger.error(
-                f"Data validation error for {season-1}-{season} season: {str(e)}"
-            )
-            raise
         except Exception as e:
             self.logger.error(
                 f"Error fetching {season-1}-{season} season data: {str(e)}"
